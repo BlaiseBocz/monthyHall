@@ -1,24 +1,26 @@
-// month hall problem 
+function randomDoorSelector(num){
+    return Math.floor(Math.random() * num);
+}
 
+function montyHallAlwaysSwitch(){
+    let doors = [0,1,2];
+    let carPosition = randomDoorSelector(3);
+    let myInitialDoor = randomDoorSelector(3);
+    const switchedDoorfound = doors.find((element) =>
+         element !== carPosition && element !== myInitialDoor
+        );
 
-
-
-function montyHall(){
-    let carPosition = Math.floor(Math.random() *3 );
-    let doorSelector =Math.floor(Math.random() *3 );
-    let chooseDoor = [0,1,2].find((door) => door !== carPosition && door !== doorSelector)
-
-    return carPosition === [0,1,2].find((door) => door !== doorSelector && door !== chooseDoor);
+    // console.log(switchedDoorfound);
+    return carPosition === doors.find((element)=> element !== myInitialDoor && element !== switchedDoorfound);
 }
 
 function gameSim(num){
-    let noOfWonGames=0;
-
+    let wins=0;
     for (let i=0;i<num;i++){
-        noOfWonGames += montyHall();
+        wins += montyHallAlwaysSwitch();
     }
 
-    return noOfWonGames;
+    return wins;
 }
 
-console.log(gameSim(100));
+console.log(gameSim(50));
